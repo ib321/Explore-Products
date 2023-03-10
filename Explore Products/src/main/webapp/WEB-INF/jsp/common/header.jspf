@@ -1,0 +1,66 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
+<html>
+
+<head>
+<title>Explore Product</title>
+<link href="webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+.footer {
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	background-color: black;
+	color: white;
+	height: 100px;
+	text-align: center;
+}
+
+  .product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .product {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  .product-image {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .product-image img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+  .product-info {
+    padding: 1rem;
+  }
+  .product-price {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+  }
+  .product-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: #4285f4;
+    color: #fff;
+    border-radius: 5px;
+    text-decoration: none;
+  }
+  .product-btn:hover {
+    background-color: #3367d6;
+  }
+</style>
+</head>
+
+<body>
