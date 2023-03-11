@@ -31,6 +31,7 @@
 				</c:forEach>
 			</div>
 		</div>
+		<!-- Remaining code Now not being used  May be removed in future-->
 		<div class="panel-body" style="display: none;">
 			<table class="table table-striped">
 				<thead>

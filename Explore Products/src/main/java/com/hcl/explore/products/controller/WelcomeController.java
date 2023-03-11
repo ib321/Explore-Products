@@ -17,13 +17,13 @@ public class WelcomeController {
 	@Autowired
 	private IExploreProductService expProductService;
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
+	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String showWelcomePage(ModelMap model) {
 		model.put("name", getLoggedinUserName());
 		model.put("products", expProductService.getProductsByUser(getLoggedinUserName()));
 		return "welcome";
 	}
-	
+
 	@RequestMapping(value = "/show-products", method = RequestMethod.GET)
 	public String showAllProductPage(@RequestParam String user, ModelMap model) {
 		model.put("products", expProductService.getProductsByUser(user));

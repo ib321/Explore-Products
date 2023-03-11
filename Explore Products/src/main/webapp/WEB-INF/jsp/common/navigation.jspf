@@ -4,13 +4,12 @@
 	<div class="navbar-collapse">
 		<ul class="nav navbar-nav">
 			<li class="active"><a href="/">Home</a></li>
+		</ul>
+		<ul class="nav navbar-nav">
 			<li><a href="/list-products">Products</a></li>
 		</ul>
 		<ul class="nav navbar-nav">
 			<li><a href="/logout">Logout</a></li>
-		</ul>
-		<ul class="nav navbar-nav">
-			<li><a href="/login">Login</a></li>
 		</ul>
 	</div>
 </nav>

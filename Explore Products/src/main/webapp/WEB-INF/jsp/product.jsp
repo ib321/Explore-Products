@@ -1,11 +1,14 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
+
+<!-- Code with Error Used for file upload need to be updated -->
 <div class="panel-body" style="display: none;">
   <form action="upload.jsp" method="post" enctype="multipart/form-data">
     <input type="file" name="imageFile"><br>
     <input type="submit" value="Upload">
   </form>
 </div>
+
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset-3 ">
@@ -50,4 +53,5 @@
 		</div>
 	</div>
 </div>
+
 <%@ include file="common/footer.jspf"%>

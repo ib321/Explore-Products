@@ -21,6 +21,6 @@ public class LogoutController {
 			new SecurityContextLogoutHandler().logout(request, response, authentication);
 		}
 
-		return "redirect:/";
+		return "redirect:/login";
 	}
 }
