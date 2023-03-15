@@ -1,6 +1,15 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 
+<style>
+.search {
+	float: right;
+}
+#sub{
+    background-color: #337ab7;
+}
+</style>
 <div class="container">
 	<div>
 		<a type="button" class="btn btn-primary btn-md" href="/add-product">Add Product</a>
@@ -8,7 +17,15 @@
 	<br>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
-			<h3>Explore Products</h3>
+			<h4>
+				Explore Products
+				<form class="search" action="/search-products" method="get">
+					<input type="text" name="search" placeholder="Enter Product Name..." style="color: red;"> 
+					<input id="sub" type="submit" value="Search">
+				</form>
+			</h4>
+
+
 		</div>
 		<div class="panel-body">
 			<div class="product-list">

@@ -8,6 +8,8 @@ import com.hcl.explore.products.model.Product;
 public interface IExploreProductService {
 
 	List<Product> getProductsByUser(String user);
+	
+	List<Product> searchProducts(String user,String search);
 
 	Optional<Product> getProductById(long id);
 

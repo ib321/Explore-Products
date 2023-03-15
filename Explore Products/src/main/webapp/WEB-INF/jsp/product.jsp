@@ -1,13 +1,7 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
 
-<!-- Code with Error Used for file upload need to be updated -->
-<div class="panel-body" style="display: none;">
-  <form action="upload.jsp" method="post" enctype="multipart/form-data">
-    <input type="file" name="imageFile"><br>
-    <input type="submit" value="Upload">
-  </form>
-</div>
+
 
 <div class="container">
 	<div class="row">
@@ -45,7 +39,10 @@
 								class="form-control" required="required" />
 							<form:errors path="productImageSrc" cssClass="text-warning" />
 						</fieldset>
-
+						<div>
+						<a href="/upload" class="product-btn">File upload</a>
+						</div>
+						<br>
 						<button type="submit" class="btn btn-success">Save</button>
 					</form:form>
 				</div>

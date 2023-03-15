@@ -28,6 +28,18 @@ public class ProductController {
 		return "list-products";
 	}
 
+	@RequestMapping(value = "/search-products", method = RequestMethod.GET)
+	public String searchProducts(@RequestParam String search, ModelMap model) {
+		String name = getLoggedInUserName(model);
+		model.put("products", expProductService.searchProducts(name, search));
+		return "list-products";
+	}
+
+	@RequestMapping(value = "/upload", method = RequestMethod.GET)
+	public String uploadProducts(ModelMap model) {
+		return "fileupload";
+	}
+
 	private String getLoggedInUserName(ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 

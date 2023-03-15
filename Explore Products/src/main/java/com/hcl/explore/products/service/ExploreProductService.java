@@ -1,5 +1,6 @@
 package com.hcl.explore.products.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +19,17 @@ public class ExploreProductService implements IExploreProductService {
 	@Override
 	public List<Product> getProductsByUser(String user) {
 		return expProductRepository.findByUserName(user);
+	}
+
+	@Override
+	public List<Product> searchProducts(String user,String search) {
+		List<Product> product =new ArrayList<Product>();
+		List<Product> products=expProductRepository.findByUserName(user);
+		for(Product p:products)
+		{
+			if(p.getProductName().toLowerCase().contains(search.toLowerCase())) product.add(p);
+		}
+		return product;
 	}
 
 	@Override
