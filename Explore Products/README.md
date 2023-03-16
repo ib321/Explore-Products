@@ -1,2 +1,4 @@
-#Explore Products
-# Project Named Explore Products using Spring Boot + Spring Security + JSP + Hibernate + Oracle
+# Project Name: Explore Products 
+# Technology Used: 
+# Spring Boot + Spring Security + Spring Data JPA + Oracle database +
+# JSP + Html + Js + Css

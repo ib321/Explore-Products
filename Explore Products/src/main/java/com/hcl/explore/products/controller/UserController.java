@@ -42,11 +42,9 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "registration";
         }
-
         userService.save(userForm);
 
         //securityService.autoLogin(userForm.getUsername(), userForm.getPasswordConfirm());
-
         return "redirect:/login";
     }
 
@@ -57,10 +55,7 @@ public class UserController {
         }
 
         if (error != null)
-            model.addAttribute("error", "Your username and password is invalid.");
-
-        if (logout != null)
-            model.addAttribute("message", "You have been logged out successfully.");
+            model.addAttribute("error", "Your username or password is invalid.");
 
         return "login";
     }

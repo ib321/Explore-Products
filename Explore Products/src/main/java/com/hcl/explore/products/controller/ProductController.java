@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcl.explore.products.model.Product;
 import com.hcl.explore.products.service.IExploreProductService;
@@ -35,6 +36,12 @@ public class ProductController {
 		return "list-products";
 	}
 
+	@RequestMapping(value = "/show-products", method = RequestMethod.GET)
+	public String showAllProductPage(@RequestParam String user, ModelMap model) {
+		model.put("products", expProductService.getProductsByUser(user));
+		return "showproduct";
+	}
+
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
 	public String uploadProducts(ModelMap model) {
 		return "fileupload";
@@ -57,8 +64,9 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/delete-product", method = RequestMethod.GET)
-	public String deleteProduct(@RequestParam long id) {
+	public String deleteProduct(@RequestParam long id, RedirectAttributes redirectAttributes) {
 		expProductService.deleteProduct(id);
+		redirectAttributes.addFlashAttribute("message", "Product Deleted successfully.");
 		return "redirect:/list-products";
 	}
 
@@ -70,7 +78,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
-	public String addProduct(ModelMap model, @Valid Product product, BindingResult result) {
+	public String addProduct(ModelMap model, @Valid Product product, BindingResult result, RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
 			return "product";
@@ -78,11 +86,12 @@ public class ProductController {
 
 		product.setUserName(getLoggedInUserName(model));
 		expProductService.saveProduct(product);
+		redirectAttributes.addFlashAttribute("message", "Product added successfully.");
 		return "redirect:/list-products";
 	}
 
 	@RequestMapping(value = "/update-product", method = RequestMethod.POST)
-	public String updateProduct(ModelMap model, @Valid Product product, BindingResult result) {
+	public String updateProduct(ModelMap model, @Valid Product product, BindingResult result, RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
 			return "product";
@@ -90,6 +99,7 @@ public class ProductController {
 
 		product.setUserName(getLoggedInUserName(model));
 		expProductService.updateProduct(product);
+		redirectAttributes.addFlashAttribute("message", "Product Updated successfully.");
 		return "redirect:/list-products";
 	}
 

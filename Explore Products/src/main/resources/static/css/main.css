@@ -1,9 +1,5 @@
-body {
-    padding-top: 40px;
-    padding-bottom: 40px;
-    background-color: #eee;
-}
 
+/* Form Related CSS Generation JSP Name: login, registration*/
 .form-signin {
     max-width: 330px;
     padding: 15px;
@@ -45,4 +41,119 @@ body {
 
 .has-error {
     color: red
+}
+
+/* Panel Related CSS Properties JSP Name: list-products */
+
+.panel-primary .panel-heading {
+	color: #fff;
+	background-color: #337ab7;
+	border-color: #337ab7;
+}
+
+.panel-heading {
+	padding: 10px 15px;
+	border-bottom: 1px solid ;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.panel {
+	margin-bottom: 20px;
+	background-color: #fff;
+	border: 1px solid ;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+	box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
+}
+
+.panel-body {
+	padding: 15px;
+	font-size: 20px;
+}
+
+.panel-heading {
+	padding: 10px 15px;
+	border-bottom: 1px solid transparent;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+
+.panel-heading>.dropdown .dropdown-toggle {
+	color: inherit;
+}
+
+.panel-title {
+	margin-top: 0;
+	margin-bottom: 0;
+	font-size: 16px;
+	color: inherit;
+}
+
+/*Product Related CSS Jsp Name:list-products, showproduct, welcome */
+
+.product-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 1rem;
+}
+
+.product {
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	overflow: hidden;
+}
+
+.product-image {
+	height: 200px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.product-image img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.product-info {
+	padding: 1rem;
+}
+
+.product-price {
+	font-size: 1.2rem;
+	font-weight: bold;
+	margin-bottom: 0.5rem;
+}
+
+.product-btn {
+	display: inline-block;
+	padding: 0.5rem 1rem;
+	background-color: #4285f4;
+	color: #fff;
+	border-radius: 5px;
+	text-decoration: none;
+}
+
+.product-btn:hover {
+	background-color: #3367d6;
+}
+
+/* Search Related CSS property JSP Name: list-products, welcome, showproduct */
+
+.search {
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
 }

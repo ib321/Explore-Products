@@ -40,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
 	}
 
+  //Code related to in memory authentication Need to be removed
   /*
 	@Autowired
     public void configureGlobalSecurity(AuthenticationManagerBuilder auth)

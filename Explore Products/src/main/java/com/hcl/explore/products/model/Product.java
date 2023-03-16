@@ -25,10 +25,10 @@ public class Product {
 		super();
 	}
 
-	public Product(String user, String productName, String productImageSrc, String desc, String productLink,
+	public Product(String userName, String productName, String productImageSrc, String desc, String productLink,
 			boolean isDone) {
 		super();
-		this.userName = user;
+		this.userName = userName;
 		this.productName = productName;
 		this.productImageSrc = productImageSrc;
 		this.description = desc;

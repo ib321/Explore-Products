@@ -22,12 +22,13 @@ public class ExploreProductService implements IExploreProductService {
 	}
 
 	@Override
-	public List<Product> searchProducts(String user,String search) {
-		List<Product> product =new ArrayList<Product>();
-		List<Product> products=expProductRepository.findByUserName(user);
-		for(Product p:products)
-		{
-			if(p.getProductName().toLowerCase().contains(search.toLowerCase())) product.add(p);
+	public List<Product> searchProducts(String user, String search) {
+		List<Product> product = new ArrayList<Product>();
+		List<Product> products = expProductRepository.findByUserName(user);
+		for (Product p : products) {
+			if (p.getProductName().toLowerCase().contains(search.toLowerCase())) {
+				product.add(p);
+			}
 		}
 		return product;
 	}
@@ -43,9 +44,9 @@ public class ExploreProductService implements IExploreProductService {
 	}
 
 	@Override
-	public void addProduct(String name, String productName, String productImageSrc, String desc, String productLink,
+	public void addProduct(String userName, String productName, String productImageSrc, String desc, String productLink,
 			boolean isDone) {
-		expProductRepository.save(new Product(name, productName, productImageSrc, desc, productLink, isDone));
+		expProductRepository.save(new Product(userName, productName, productImageSrc, desc, productLink, isDone));
 	}
 
 	@Override

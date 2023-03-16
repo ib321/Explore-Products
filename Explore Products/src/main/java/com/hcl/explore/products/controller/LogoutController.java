@@ -9,18 +9,19 @@ import org.springframework.security.web.authentication.logout.SecurityContextLog
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class LogoutController {
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(HttpServletRequest request, HttpServletResponse response) {
+	public String logout(HttpServletRequest request, HttpServletResponse response, RedirectAttributes redirectAttributes) {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication != null) {
 			new SecurityContextLogoutHandler().logout(request, response, authentication);
 		}
-
+		redirectAttributes.addFlashAttribute("message", "You have been logged out successfully.");
 		return "redirect:/login";
 	}
 }

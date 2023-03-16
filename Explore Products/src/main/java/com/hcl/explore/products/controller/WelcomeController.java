@@ -23,11 +23,11 @@ public class WelcomeController {
 		model.put("products", expProductService.getProductsByUser(getLoggedinUserName()));
 		return "welcome";
 	}
-
-	@RequestMapping(value = "/show-products", method = RequestMethod.GET)
-	public String showAllProductPage(@RequestParam String user, ModelMap model) {
-		model.put("products", expProductService.getProductsByUser(user));
-		return "showproduct";
+	@RequestMapping(value = { "/search", "/searchWelcome" }, method = RequestMethod.GET)
+	public String showWelcomePage(@RequestParam String search,ModelMap model) {
+		model.put("name", getLoggedinUserName());
+		model.put("products", expProductService.searchProducts(getLoggedinUserName(), search));
+		return "welcome";
 	}
 
 	private String getLoggedinUserName() {
