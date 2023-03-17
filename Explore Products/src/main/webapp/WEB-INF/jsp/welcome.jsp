@@ -1,6 +1,7 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
 
+
 <link href="/css/main.css" rel="stylesheet">
 
 <div class="container">
@@ -41,8 +42,5 @@
 	</div>
 
 </div>
-
-
-
 
 <%@ include file="common/footer.jspf"%>

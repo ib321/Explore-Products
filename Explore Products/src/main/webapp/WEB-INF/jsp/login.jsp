@@ -1,7 +1,7 @@
 <head>
 <title>Log in</title>
 <link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet">
 <style>
 .container {
@@ -91,7 +91,7 @@
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				
 				<button class="btn btn-primary" type="submit">Log In</button>
-				
+
 				<h6 class="text-center">
 					Don't have an account? <a href="/registration">Sign up now</a>
 				</h6>

@@ -1,5 +1,6 @@
 package com.hcl.explore.products.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,8 @@ public class Product {
 	private String productImageSrc;
 	@Size(min = 10, message = "Enter at least 10 Characters...")
 	private String description;
+	@Column(name = "PRODUCT_LINK", length = 1000)
+	@Size(max = 1000, message = "Your Url is more than 1000 character...")
 	private String productLink;
 
 	public Product() {

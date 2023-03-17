@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.hcl.explore.products.model.User;
 import com.hcl.explore.products.service.SecurityService;
 import com.hcl.explore.products.service.UserService;
+import com.hcl.explore.products.validator.UserValidator;
 
 @Controller
 public class UserController {

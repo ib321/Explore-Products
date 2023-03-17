@@ -1,11 +1,20 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-
-
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+	$(document).ready(function() {
+		copyUrl();
+		console.log("1n");
+		if ($("#productUrl").text().trim().length > 0) {
+			console.log("nsn");
+		    $("#productLink").value=$("#productUrl").value;
+		}
+	});
+</script>
 
 <div class="container">
 	<div class="row">
-		<div class="col-md-6 col-md-offset-3 ">
+		<div class="col-md-6 col-md-offset">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Add Product</div>
 				<div class="panel-body">
@@ -44,11 +53,44 @@
 						</div>
 						<br>
 						<button type="submit" class="btn btn-success">Save</button>
+						<button type="reset" class="btn btn-warning">Clear</button>
 					</form:form>
+
 				</div>
 			</div>
 		</div>
+
+
+		<div class="col-md-6 col-md-offset">
+			<div class="panel panel-primary">
+				<div class="panel-heading">Image Link Generator</div>
+				<div class="panel-body">
+					<form action="/getImage" method="get">
+						<label for="productUrl">Product URL:</label><br> 
+						<input type="text" id="productUrl" name="productUrl" value="${productUrl}"><br> <br>
+						<input type="submit" value="Fetch Image Link">
+					</form>
+					<!--  
+					<button onclick='copyUrl();'>Transfer</button>
+					<br>
+					-->
+					<c:if test="${not empty imageUrl}">
+						<label for="productImageLink">Product Image Link:</label>
+						<br>
+						<input type="text" id="productImageLink" name="productImageLink"
+							value="${imageUrl}">
+						<button onclick='copyImageUrl();'>Transfer</button>
+						<br>
+						<br>
+						Generate Auto description from URL:
+						<br>
+						<button onclick='getProductDescFromURL();'>Generate Description</button>
+					</c:if>
+				</div>
+			</div>
+		</div>
+
 	</div>
 </div>
-
+<script src="/js/main.js"></script>
 <%@ include file="common/footer.jspf"%>

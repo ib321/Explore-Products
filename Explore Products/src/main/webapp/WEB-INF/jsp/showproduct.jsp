@@ -1,6 +1,5 @@
 <%@ include file="common/header.jspf"%>
 
-
 <link href="/css/main.css" rel="stylesheet">
 
 <div class="container">

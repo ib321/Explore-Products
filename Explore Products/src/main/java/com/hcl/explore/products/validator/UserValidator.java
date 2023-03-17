@@ -1,4 +1,4 @@
-package com.hcl.explore.products.controller;
+package com.hcl.explore.products.validator;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
