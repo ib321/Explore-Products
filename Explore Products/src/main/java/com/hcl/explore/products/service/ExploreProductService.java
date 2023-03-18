@@ -1,11 +1,18 @@
 package com.hcl.explore.products.service;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Collections;
+import java.util.UUID;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.hcl.explore.products.model.Product;
 import com.hcl.explore.products.repository.ExploreProductRepository;
@@ -18,7 +25,9 @@ public class ExploreProductService implements IExploreProductService {
 
 	@Override
 	public List<Product> getProductsByUser(String user) {
-		return expProductRepository.findByUserName(user);
+		List<Product> productList = expProductRepository.findByUserName(user);
+		Collections.reverse(productList);
+		return productList;
 	}
 
 	@Override
@@ -60,5 +69,40 @@ public class ExploreProductService implements IExploreProductService {
 	@Override
 	public void saveProduct(Product product) {
 		expProductRepository.save(product);
+	}
+
+	@Override
+	public boolean deleteProductImage(String productImageSrc) {
+		if (productImageSrc != null)
+			productImageSrc = productImageSrc.replaceAll("[^a-zA-Z0-9./_-]", "");
+		final Path path = Paths.get("./src/main/resources/static" + productImageSrc);
+		try {
+			boolean result = Files.deleteIfExists(path);
+			if (result) {
+				System.out.println("File deleted successfully: " + path);
+				return true;
+			} else {
+				System.out.println("File does not exist: " + path);
+				return false;
+			}
+		} catch (Exception e) {
+			System.out.println("Failed to delete file: " + path + e);
+			return false;
+		}
+	}
+
+	@Override
+	public String saveProductImage(Path path, MultipartFile file) {
+		
+		String fileName = UUID.randomUUID().toString() + "_" + file.getOriginalFilename();
+		fileName = fileName.replaceAll("[^a-zA-Z0-9./_-]", "");
+		try {
+			Files.createDirectories(path);
+			Files.copy(file.getInputStream(), path.resolve(fileName));
+			//Files.copy(file.getInputStream(), path.resolve(fileName), StandardCopyOption.REPLACE_EXISTING);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return fileName;
 	}
 }

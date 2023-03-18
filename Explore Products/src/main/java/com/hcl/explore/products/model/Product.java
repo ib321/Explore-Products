@@ -6,7 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.Size;
+
+import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "product")
@@ -23,6 +26,8 @@ public class Product {
 	@Column(name = "PRODUCT_LINK", length = 1000)
 	@Size(max = 1000, message = "Your Url is more than 1000 character...")
 	private String productLink;
+	@Transient
+	private MultipartFile productImageFile;
 
 	public Product() {
 		super();
@@ -86,4 +91,11 @@ public class Product {
 		this.productLink = productLink;
 	}
 
+	public MultipartFile getProductImageFile() {
+		return productImageFile;
+	}
+
+	public void setProductImageFile(MultipartFile productImageFile) {
+		this.productImageFile = productImageFile;
+	}
 }

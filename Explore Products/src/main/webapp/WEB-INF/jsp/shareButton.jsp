@@ -80,7 +80,7 @@
 
 	Click On Share Button And Share Your All Products.
 	<button class="popup-btn">
-		<img src="/share.jpg" alt="Share" class="share"> Share
+		<img src="/share.png" alt="Share" class="share"> Share
 	</button>
 
 	<div class="video-popup">

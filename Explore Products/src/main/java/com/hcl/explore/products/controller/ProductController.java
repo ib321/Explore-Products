@@ -81,7 +81,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public String uploadProducts(ModelMap model) {
+	public String uploadPage(ModelMap model) {
 		return "fileupload";
 	}
 	
@@ -99,6 +99,10 @@ public class ProductController {
 			return "product";
 		}
 
+		final Path path = Paths.get("./src/main/resources/static/images/" + getLoggedInUserName(model) + "/");
+		MultipartFile file = product.getProductImageFile();
+		product.setProductImageSrc("/images/" + getLoggedInUserName(model) + "/" + expProductService.saveProductImage(path, file));
+
 		product.setUserName(getLoggedInUserName(model));
 		expProductService.saveProduct(product);
 		redirectAttributes.addFlashAttribute("message", "Product added successfully.");
@@ -112,6 +116,12 @@ public class ProductController {
 			return "product";
 		}
 
+		String productImageSrc = product.getProductImageSrc();
+		expProductService.deleteProductImage(productImageSrc);
+		final Path path = Paths.get("./src/main/resources/static/images/" + getLoggedInUserName(model) + "/");
+		MultipartFile file = product.getProductImageFile();
+		product.setProductImageSrc("/images/" + getLoggedInUserName(model) + "/" + expProductService.saveProductImage(path, file));
+
 		product.setUserName(getLoggedInUserName(model));
 		expProductService.updateProduct(product);
 		redirectAttributes.addFlashAttribute("message", "Product Updated successfully.");
@@ -119,16 +129,20 @@ public class ProductController {
 	}
 	
 	@RequestMapping(value = "/delete-product", method = RequestMethod.GET)
-	public String deleteProduct(@RequestParam long id, RedirectAttributes redirectAttributes) {
+	public String deleteProduct(@RequestParam long id, RedirectAttributes redirectAttributes, ModelMap model) {
+		String productName = expProductService.getProductById(id).get().getProductName();
+		String productImageSrc = expProductService.getProductById(id).get().getProductImageSrc();
 		expProductService.deleteProduct(id);
-		redirectAttributes.addFlashAttribute("message", "Product Deleted successfully.");
+		expProductService.deleteProductImage(productImageSrc);
+		String msg = "Product with  Name: "+ productName + "  has been deleted successfully.";
+		redirectAttributes.addFlashAttribute("dangermsg", msg);
 		return "redirect:/list-products";
 	}
 
 	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
 	public String getImage(@RequestParam String productUrl, Product product, BindingResult result, ModelMap model,
 			RedirectAttributes redirectAttributes) throws IOException {
-		String productLink = productUrl;
+		String productLink=productUrl;
 		if (productUrl == null || productUrl.isEmpty())
 			return "redirect:/add-product";
 		Document doc = Jsoup.connect(productUrl).get();
@@ -157,4 +171,5 @@ public class ProductController {
 		}
 		return "redirect:/add-product";
 	}
+
 }

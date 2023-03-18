@@ -9,6 +9,8 @@
 		<a type="button" class="btn btn-primary btn-md" href="/add-product">Add Product</a>
 	</div>
 	<h4 class="text-success" >${message}</h4>
+	<h4 class="text-danger" >${dangermsg}</h4>
+	<h4 class="text-warning" >${warningmsg}</h4>
 
 	<div class="panel panel-primary">
 		<div class="panel-heading">

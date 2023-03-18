@@ -4,9 +4,9 @@
 <script>
 	$(document).ready(function() {
 		copyUrl();
-		console.log("1n");
+		console.log("inside ready");
 		if ($("#productUrl").text().trim().length > 0) {
-			console.log("nsn");
+			console.log("inside url");
 		    $("#productLink").value=$("#productUrl").value;
 		}
 	});
@@ -18,7 +18,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Add Product</div>
 				<div class="panel-body">
-					<form:form method="post" modelAttribute="product">
+					<form:form method="post" modelAttribute="product" enctype="multipart/form-data">
 						<form:hidden path="id" />
 
 						<fieldset class="form-group">
@@ -43,14 +43,17 @@
 						</fieldset>
 
 						<fieldset class="form-group">
-							<form:label path="productImageSrc">Product Image link</form:label>
-							<form:input path="productImageSrc" type="text"
+							<form:label path="productImageFile">Product Image</form:label>
+							<form:input path="productImageFile" type="file" accept="image/*"
 								class="form-control" required="required" />
+							<form:errors path="productImageFile" cssClass="text-warning" />
+						</fieldset>
+
+						<fieldset class="form-group">
+							<form:input path="productImageSrc" type="text"
+								class="form-control" readonly="true"/>
 							<form:errors path="productImageSrc" cssClass="text-warning" />
 						</fieldset>
-						<div>
-						<a href="/upload" class="product-btn">File upload</a>
-						</div>
 						<br>
 						<button type="submit" class="btn btn-success">Save</button>
 						<button type="reset" class="btn btn-warning">Clear</button>
@@ -61,10 +64,14 @@
 		</div>
 
 
+
 		<div class="col-md-6 col-md-offset">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Image Link Generator</div>
 				<div class="panel-body">
+					<div>
+						<a href="/upload" class="product-btn">Test Upload Page</a>
+					</div>
 					<form action="/getImage" method="get">
 						<label for="productUrl">Product URL:</label><br> 
 						<input type="text" id="productUrl" name="productUrl" value="${productUrl}"><br> <br>

@@ -5,6 +5,7 @@
 </div>
 <div class="error">
 	<h2>${exception}</h2>
+	<h2>${errorMessage}</h2>
 </div>
 
 <%@ include file="common/footer.jspf"%>
