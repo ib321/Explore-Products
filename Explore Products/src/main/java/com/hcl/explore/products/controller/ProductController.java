@@ -24,12 +24,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.hcl.explore.products.model.Product;
 import com.hcl.explore.products.service.IExploreProductService;
+import com.hcl.explore.products.validator.ProductValidator;
 
 @Controller
 public class ProductController {
 
 	@Autowired
 	private IExploreProductService expProductService;
+	
+	@Autowired
+    private ProductValidator productValidator;
 
 	private String getLoggedInUserName(ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -94,7 +98,7 @@ public class ProductController {
 
 	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
 	public String addProduct(ModelMap model, @Valid Product product, BindingResult result, RedirectAttributes redirectAttributes) {
-
+		productValidator.validate(product, result);
 		if (result.hasErrors()) {
 			return "product";
 		}
@@ -134,7 +138,7 @@ public class ProductController {
 		String productImageSrc = expProductService.getProductById(id).get().getProductImageSrc();
 		expProductService.deleteProduct(id);
 		expProductService.deleteProductImage(productImageSrc);
-		String msg = "Product with  Name: "+ productName + "  has been deleted successfully.";
+		String msg = "Product with <strong>Name: " + productName + "</strong> has been deleted successfully.";
 		redirectAttributes.addFlashAttribute("dangermsg", msg);
 		return "redirect:/list-products";
 	}
@@ -142,7 +146,7 @@ public class ProductController {
 	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
 	public String getImage(@RequestParam String productUrl, Product product, BindingResult result, ModelMap model,
 			RedirectAttributes redirectAttributes) throws IOException {
-		String productLink=productUrl;
+		String productLink = productUrl;
 		if (productUrl == null || productUrl.isEmpty())
 			return "redirect:/add-product";
 		Document doc = Jsoup.connect(productUrl).get();
@@ -154,7 +158,7 @@ public class ProductController {
 		else
 			imageUrl = "";
 		if (imageUrl.isEmpty())
-			imageUrl = "Try Once Again";
+			imageUrl = "Did not worked!";
 		redirectAttributes.addFlashAttribute("imageUrl", imageUrl);
 		redirectAttributes.addFlashAttribute("productUrl", productLink);
 		return "redirect:/add-product";

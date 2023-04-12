@@ -1,6 +1,5 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
 	$(document).ready(function() {
 		copyUrl();
@@ -11,7 +10,7 @@
 		}
 	});
 </script>
-
+<h4 class="text-danger" >${dangermsg}</h4>
 <div class="container">
 	<div class="row">
 		<div class="col-md-6 col-md-offset">
@@ -69,14 +68,23 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Image Link Generator</div>
 				<div class="panel-body">
-					<div>
+					<div style="display: none;">
 						<a href="/upload" class="product-btn">Test Upload Page</a>
 					</div>
+					<br>
+					<div>
+						<label for="image-link">Download Image:</label><br>
+						<input type="text" id="image-link">
+						<button onclick="downloadImage()">Download</button>
+					</div><br>
 					<form action="/getImage" method="get">
-						<label for="productUrl">Product URL:</label><br> 
-						<input type="text" id="productUrl" name="productUrl" value="${productUrl}"><br> <br>
+						<label for="productUrl">Product URL:</label><br>
+						<input type="text" id="productUrl" name="productUrl" value="${productUrl}"><br><br>
 						<input type="submit" value="Fetch Image Link">
 					</form>
+					<div>
+						<button onclick='getProductDescFromURL();'>Fill Description</button>
+					</div>
 					<!--  
 					<button onclick='copyUrl();'>Transfer</button>
 					<br>
@@ -87,11 +95,6 @@
 						<input type="text" id="productImageLink" name="productImageLink"
 							value="${imageUrl}">
 						<button onclick='copyImageUrl();'>Transfer</button>
-						<br>
-						<br>
-						Generate Auto description from URL:
-						<br>
-						<button onclick='getProductDescFromURL();'>Generate Description</button>
 					</c:if>
 				</div>
 			</div>

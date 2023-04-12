@@ -103,6 +103,7 @@
 	border-radius: 5px;
 	overflow: hidden;
 	width: 258.66px;
+	height: 351.83px;
 }
 
 .product-image {
@@ -120,6 +121,21 @@
 
 .product-info {
 	padding: 1rem;
+}
+
+.product-info h3 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.product-info h5 {
+	height: 2.4em;
+	display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    overflow: hidden;
 }
 
 .product-price {

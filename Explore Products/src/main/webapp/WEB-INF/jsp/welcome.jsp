@@ -22,6 +22,9 @@
 			</h4>
 		</div>
 		<div class="panel-body">
+			<c:if test="${empty products}">
+				<jsp:include page="noproductfound.jsp" />
+			</c:if>
 			<div class="product-list">
 				<c:forEach var="product" items="${products}">
 					<div class="product">
@@ -30,8 +33,8 @@
 								alt="${product.productName}">
 						</div>
 						<div class="product-info">
-							<h3>${product.productName}</h3>
-							<h5>${product.description}</h5>
+							<h3 data-toggle="tooltip" title="${product.productName}" >${product.productName}</h3>
+							<h5 data-toggle="tooltip" title="${product.description}" >${product.description}</h5>
 							<a href="${product.productLink}"  target="_blank" class="btn btn-info">Click
 								Here</a>
 						</div>
@@ -42,5 +45,9 @@
 	</div>
 
 </div>
-
+<script>
+$('h3').tooltip();
+$('h5').tooltip();
+</script>
+<script src="/js/main.js"></script>
 <%@ include file="common/footer.jspf"%>

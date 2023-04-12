@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import javax.validation.constraints.Size;
 
 import org.springframework.web.multipart.MultipartFile;
 
@@ -16,15 +15,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class Product {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	private String userName;
 	private String productName;
 	private String productImageSrc;
-	@Size(min = 10, message = "Enter at least 10 Characters...")
 	private String description;
 	@Column(name = "PRODUCT_LINK", length = 1000)
-	@Size(max = 1000, message = "Your Url is more than 1000 character...")
 	private String productLink;
 	@Transient
 	private MultipartFile productImageFile;

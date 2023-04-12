@@ -2,7 +2,7 @@
 <%@ include file="common/navigation.jspf"%>
 
 <link href="/css/main.css" rel="stylesheet">
-<script src="/js/main.js"></script>
+
 
 <div class="container">
 	<div>
@@ -23,7 +23,11 @@
 			</h4>
 		</div>
 		<div class="panel-body">
+			<c:if test="${empty products}">
+				<jsp:include page="noproductfound.jsp" />
+			</c:if>
 			<div class="product-list">
+			
 				<c:forEach var="product" items="${products}">
 					<div class="product">
 						<div class="product-image">
@@ -31,8 +35,8 @@
 								alt="${product.productName}">
 						</div>
 						<div class="product-info">
-							<h3>${product.productName}</h3>
-							<h5>${product.description}</h5>
+							<h3 data-toggle="tooltip" title="${product.productName}" >${product.productName}</h3>
+							<h5 data-toggle="tooltip" title="${product.description}" >${product.description}</h5>
 							<a href="${product.productLink}" target="_blank" class="btn btn-info">Click Here</a>
 							<a type="button" class="btn btn-success"
 								href="/update-product?id=${product.id}">Update</a>
@@ -45,4 +49,9 @@
 		</div>
 	</div>
 </div>
+<script>
+$('h3').tooltip();
+$('h5').tooltip();
+</script>
+<script src="/js/main.js"></script>
 <%@ include file="common/footer.jspf"%>
