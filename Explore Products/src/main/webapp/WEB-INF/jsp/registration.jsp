@@ -1,7 +1,87 @@
 <%@ include file="common/header.jspf"%>
 
 <title>Create an account</title>
-<link href="/css/main.css" rel="stylesheet">
+<link
+	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<style>
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
+body {
+	font-family: 'Roboto', sans-serif;
+	background-image: url("bg-image.jpg");
+	background-size: cover;
+	background-position: center;
+}
+
+.container {
+	width: 500px;
+	margin: 50px auto;
+}
+
+.form-signin {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 10px;
+	background-color: #fff;
+}
+
+.form-signin-heading {
+	margin-bottom: 20px;
+}
+
+.form-group {
+	width: 80%;
+	margin-bottom: 15px;
+}
+
+.form-label {
+	display: block;
+	font-weight: bold;
+}
+
+.form-input {
+	display: block;
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+}
+
+.form-errors {
+	display: block;
+	color: #f00;
+}
+
+.btn {
+	width: 80%;
+	padding: 12px;
+	border: none;
+	border-radius: 10px;
+}
+
+.btn-primary {
+	background-color: #007bff;
+	color: #fff;
+}
+
+.form-control {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.text-warning {
+  display: block;
+  color: #f00;
+}
+</style>
 
 <div class="container">
 

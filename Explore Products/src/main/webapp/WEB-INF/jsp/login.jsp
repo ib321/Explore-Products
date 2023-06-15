@@ -4,12 +4,17 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
 	rel="stylesheet">
 <style>
+body {
+	background-image: url("bg-image.jpg");
+	background-size: cover;
+	background-position: center;
+}
+
 .container {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 100vh;
-	background-color: #f5f5f5;
 }
 
 .form-signin {
@@ -93,7 +98,7 @@
 				<button class="btn btn-primary" type="submit">Log In</button>
 
 				<h6 class="text-center">
-					Don't have an account? <a href="/registration">Sign up now</a>
+					Don't have an account? <a href="/registration">Create new account</a>
 				</h6>
 			</div>
 		</form>
