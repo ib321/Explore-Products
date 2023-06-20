@@ -5,12 +5,14 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import org.jasypt.util.text.BasicTextEncryptor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
@@ -26,6 +28,11 @@ import com.hcl.explore.products.model.Product;
 import com.hcl.explore.products.service.IExploreProductService;
 import com.hcl.explore.products.validator.ProductValidator;
 
+/**
+ * 
+ * @author Indian Bittu
+ *
+ */
 @Controller
 public class ProductController {
 
@@ -34,6 +41,9 @@ public class ProductController {
 	
 	@Autowired
     private ProductValidator productValidator;
+
+	@Value("${url.username.isEncrypted}")
+	private boolean isUrlUserNameEnc;
 
 	private String getLoggedInUserName(ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -67,6 +77,11 @@ public class ProductController {
 
 	@RequestMapping(value = "/show-products", method = RequestMethod.GET)
 	public String showAllProductPage(@RequestParam String user, ModelMap model) {
+		if (isUrlUserNameEnc) {
+			BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+			textEncryptor.setPassword("Encrypted@#137");
+			user = textEncryptor.decrypt(user);
+		}
 		model.put("products", expProductService.getProductsByUser(user));
 		return "showproduct";
 	}

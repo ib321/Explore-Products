@@ -4,15 +4,15 @@ Explore Products is a web application that allows users to add and share differe
 
 ## Technology Used
 
-- Java: The backend programming language.
-- Spring Boot: A framework for Java web applications. Modules used:
+- Java(1.8): The backend programming language.
+- Spring Boot(2.0.4.RELEASE): A framework for Java web applications. Modules used:
   - Spring Security: A module for authentication and authorization.
   - Spring Data JPA: A module for data access and manipulation using JPA.
 - JSP: A technology for dynamic web pages.
 - JavaScript: A scripting language for web interactivity.
-- HTML, CSS, Bootstrap: Technologies for web design and layout.
-- Oracle: A relational database management system.
-- Maven: A build automation tool.
+- HTML, CSS, Bootstrap(3.3.6): Technologies for web design and layout.
+- Oracle(12c): A relational database management system.
+- Maven(4.0.0): A build automation tool.
 
 ## Installation
 

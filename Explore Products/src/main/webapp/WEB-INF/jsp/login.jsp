@@ -1,11 +1,10 @@
 <head>
 <title>Log in</title>
-<link
-	href="https://stackpath.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"
-	rel="stylesheet">
+<link href="/css/bootstrap-3.3.6.css/" rel="stylesheet">
+<script src="/js/bootstrap-3.3.6.js/"></script>
 <style>
 body {
-	background-image: url("bg-image.jpg");
+	background-image: url("/commonimage/bg-image.jpg");
 	background-size: cover;
 	background-position: center;
 }

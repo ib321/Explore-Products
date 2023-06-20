@@ -8,8 +8,12 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
+/**
+ * 
+ * @author Indian Bittu
+ *
+ */
 @Controller
 @ControllerAdvice
 public class ErrorController {
@@ -24,7 +28,7 @@ public class ErrorController {
 		mv.setViewName("error");
 		return mv;
 	}
-	
+
 	@ExceptionHandler(MaxUploadSizeExceededException.class)
 	public ModelAndView handleMaxSizeException(MaxUploadSizeExceededException exc, HttpServletRequest request,
 			HttpServletResponse response) {

@@ -80,7 +80,7 @@
 
 	Click On Share Button And Share Your All Products.
 	<button class="popup-btn">
-		<img src="/share.png" alt="Share" class="share"> Share
+		<img src="/commonimage/share.png" alt="Share" class="share"> Share
 	</button>
 
 	<div class="video-popup">
@@ -88,7 +88,7 @@
 			<span class="close">&times;</span>
 			<p>Copy this link:</p>
 			<input type="text" id="link"
-				value="http://localhost:8098/show-products?user=${name}">
+				value="http://localhost:8098/show-products?user=${urlUserName}">
 			<button id="copy">Copy</button>
 		</div>
 	</div>

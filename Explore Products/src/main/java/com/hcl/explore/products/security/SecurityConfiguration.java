@@ -12,6 +12,11 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+/**
+ * 
+ * @author Indian Bittu
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -26,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/css/**", "/images/**", "/js/**", "/registration", "/show-products", "/bg-image.jpg").permitAll().anyRequest()
+		http.authorizeRequests().antMatchers("/css/**", "/images/**", "/js/**", "/registration", "/show-products", "/commonimage/**").permitAll().anyRequest()
 				.authenticated().and().formLogin().loginPage("/login").permitAll().and().logout().permitAll();
 	}
 
