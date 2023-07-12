@@ -10,13 +10,13 @@ Explore Products is a web application that allows users to add and share differe
   - Spring Data JPA: A module for data access and manipulation using JPA.
 - JSP: A technology for dynamic web pages.
 - JavaScript: A scripting language for web interactivity.
-- HTML, CSS, Bootstrap(3.3.6): Technologies for web design and layout.
-- Oracle(12c): A relational database management system.
+- HTML, CSS, Bootstrap(3.3.6), jquery(2.2.4): Technologies for web design and layout.
+- Oracle(11g): A relational database management system.
 - Maven(4.0.0): A build automation tool.
 
 ## Installation
 
-To install and run Explore Products on localhost, you need to have Java, Eclipse, and Oracle Database installed on your system. You also need to clone the repository from GitHub using the following command:
+To install and run Explore Products on localhost, you need to have Java, Eclipse/STS, and Oracle Database installed on your system. You also need to clone the repository from GitHub using the following command:
 
 ```bash
 git clone https://github.com/ib321/Explore-Products.git
@@ -35,7 +35,9 @@ After that, you can run the application using Eclipse by following these steps:
 
 - Import the project as a Maven project.
 - Maven clean the imported project from -- project menu -> Run As -> Maven clean
-- Maven install the imported project from -- project menu -> Run As -> Maven install
+- Maven install the imported project from -- project menu -> Run As -> Maven build
+- Enter ``Goals: clean install`` make sure to tick the checkbox named `Skip Tests`
+- Then Click `Run` it will build and clean install the project
 - Run the `ExploreProductsApplication.java` class as a Java application.
 
 ## Usage
@@ -56,6 +58,7 @@ If you want to contribute to Explore Products, you are welcome to do so. Please 
 
 - Fork the repository and create a new branch for your feature or bug fix.
 - Write clear and concise code and comments following the coding standards and best practices.
+- Change only the part of code you have written don't format the already written code.
 - Test your code thoroughly and ensure it works as expected and does not break any existing functionality.
 - Commit and push your changes to your branch and create a pull request with a detailed description of your changes and why they are needed.
 - Wait for feedback or approval from the maintainer before merging your pull request.

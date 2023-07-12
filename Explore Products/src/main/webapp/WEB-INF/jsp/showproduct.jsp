@@ -2,6 +2,9 @@
 
 <link href="/css/main.css" rel="stylesheet">
 <div class="container">
+	<h4 class="text-success">${message}</h4>
+	<h4 class="text-danger">${dangermsg}</h4>
+	<h4 class="text-warning">${warningmsg}</h4>
 	<div class="panel panel-primary">
 		<div class="panel-heading">
 			<h4>

@@ -88,7 +88,7 @@
 			<span class="close">&times;</span>
 			<p>Copy this link:</p>
 			<input type="text" id="link"
-				value="http://localhost:8098/show-products?user=${urlUserName}">
+				value="http://localhost:8098/show-products?refShareId=${urlUserName}">
 			<button id="copy">Copy</button>
 		</div>
 	</div>

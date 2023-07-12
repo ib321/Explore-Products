@@ -1,5 +1,7 @@
 package com.hcl.explore.products.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import org.jasypt.util.text.BasicTextEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +39,13 @@ public class WelcomeController {
 			textEncryptor.setPassword("Encrypted@#137");
 			userName = textEncryptor.encrypt(userName);
 		}
-		model.put("urlUserName", userName);
+		String urlEncodedUserName = userName;
+		try {
+			urlEncodedUserName = URLEncoder.encode(userName, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		model.put("urlUserName", urlEncodedUserName);
 		return "welcome";
 	}
 	@RequestMapping(value = { "/search", "/searchWelcome" }, method = RequestMethod.GET)

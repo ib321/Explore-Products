@@ -1,8 +1,9 @@
 <%@ include file="common/header.jspf"%>
 
 <title>Create an account</title>
-<link href="/css/bootstrap-3.3.6.css/" rel="stylesheet">
-<script src="/js/bootstrap-3.3.6.js/"></script>
+<link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+<script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
+<script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style>
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 

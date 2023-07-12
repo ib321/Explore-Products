@@ -76,11 +76,17 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/show-products", method = RequestMethod.GET)
-	public String showAllProductPage(@RequestParam String user, ModelMap model) {
-		if (isUrlUserNameEnc) {
-			BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
-			textEncryptor.setPassword("Encrypted@#137");
-			user = textEncryptor.decrypt(user);
+	public String showAllProductPage(@RequestParam String refShareId, ModelMap model) {
+		String user=refShareId;
+		try {
+			if (isUrlUserNameEnc) {
+				BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
+				textEncryptor.setPassword("Encrypted@#137");
+				user = textEncryptor.decrypt(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			model.put("dangermsg", "An error occurred: " + e.getMessage());
 		}
 		model.put("products", expProductService.getProductsByUser(user));
 		return "showproduct";
@@ -164,18 +170,23 @@ public class ProductController {
 		String productLink = productUrl;
 		if (productUrl == null || productUrl.isEmpty())
 			return "redirect:/add-product";
-		Document doc = Jsoup.connect(productUrl).get();
-		String imageUrl;
-		if (productUrl.contains("amazon"))
-			imageUrl = doc.select("#landingImage").attr("src");
-		else if (productUrl.contains("flipkart"))
-			imageUrl = doc.select("img._396cs4").attr("src");
-		else
-			imageUrl = "";
-		if (imageUrl.isEmpty())
-			imageUrl = "Did not worked!";
-		redirectAttributes.addFlashAttribute("imageUrl", imageUrl);
-		redirectAttributes.addFlashAttribute("productUrl", productLink);
+		try {
+			Document doc = Jsoup.connect(productUrl).get();
+			String imageUrl;
+			if (productUrl.contains("amazon"))
+				imageUrl = doc.select("#landingImage").attr("src");
+			else if (productUrl.contains("flipkart"))
+				imageUrl = doc.select("img._396cs4").attr("src");
+			else
+				imageUrl = "";
+			if (imageUrl.isEmpty())
+				imageUrl = "Did not worked!";
+			redirectAttributes.addFlashAttribute("imageUrl", imageUrl);
+			redirectAttributes.addFlashAttribute("productUrl", productLink);
+		} catch (Exception e) {
+			e.printStackTrace();
+			redirectAttributes.addFlashAttribute("dangermsg", "An error occurred while connecting: " + e.getMessage());
+		}
 		return "redirect:/add-product";
 	}
 

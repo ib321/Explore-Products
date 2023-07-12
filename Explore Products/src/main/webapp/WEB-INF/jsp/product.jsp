@@ -1,21 +1,45 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
+
+<link href="/css/switch.css/" rel="stylesheet">
 <script>
 	$(document).ready(function() {
 		copyUrl();
-		console.log("inside ready");
 		if ($("#productUrl").text().trim().length > 0) {
 			console.log("inside url");
 		    $("#productLink").value=$("#productUrl").value;
 		}
+		showHideDiv();
 	});
+	
+	function showHideDiv() {
+		var checkBox = document.getElementById("ToolsCheckBox");
+		var ToolsDiv = document.getElementById("ToolsDiv");
+		var imageUrl = document.getElementById("productImageLink") ?
+				document.getElementById("productImageLink").value : "";
+		if (imageUrl != "") {
+			checkBox.checked = true;
+		}
+		if (true == checkBox.checked) {
+			ToolsDiv.style.display = "block";
+		} else {
+			ToolsDiv.style.display = "none";
+		}
+	}
 </script>
-<h4 class="text-danger" >${dangermsg}</h4>
 <div class="container">
+	<h4 class="text-success">${message}</h4>
+	<h4 class="text-danger">${dangermsg}</h4>
+	<h4 class="text-warning">${warningmsg}</h4>
 	<div class="row">
-		<div class="col-md-6 col-md-offset">
+		<div class="col-md-6 col-md-offset" id="AddProductDiv">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Add Product</div>
+				<div class="panel-heading">Add Product 
+				<label class="switch" style="float: right;">
+  					<input type="checkbox" id="ToolsCheckBox" onclick="showHideDiv()">
+  					<span class="slider round" title="Click here to show or hide the tools."></span>
+				</label>
+				</div>
 				<div class="panel-body">
 					<form:form method="post" modelAttribute="product" enctype="multipart/form-data">
 						<form:hidden path="id" />
@@ -49,7 +73,7 @@
 						</fieldset>
 
 						<fieldset class="form-group">
-							<form:input path="productImageSrc" type="text"
+							<form:hidden path="productImageSrc"
 								class="form-control" readonly="true"/>
 							<form:errors path="productImageSrc" cssClass="text-warning" />
 						</fieldset>
@@ -63,8 +87,8 @@
 		</div>
 
 
-
-		<div class="col-md-6 col-md-offset">
+	<c:if test="true">
+		<div class="col-md-6 col-md-offset" id="ToolsDiv">
 			<div class="panel panel-primary">
 				<div class="panel-heading">Image Link Generator</div>
 				<div class="panel-body">
@@ -99,6 +123,7 @@
 				</div>
 			</div>
 		</div>
+	</c:if>
 
 	</div>
 </div>
