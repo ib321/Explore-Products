@@ -89,23 +89,30 @@ body {
 		<h2 class="form-signin-heading">Create your account</h2>
 
 		<div class="form-group">
-			<form:label path="username">User Name</form:label>
+			<form:label path="fullname">Your name</form:label>
+			<form:input path="fullname" type="text" class="form-control"
+				maxlength="64" placeholder="First and last name" required="required" />
+			<form:errors path="fullname" cssClass="text-warning" />
+		</div>
+
+		<div class="form-group">
+			<form:label path="username">User ID or Email</form:label>
 			<form:input path="username" type="text" class="form-control"
-				placeholder="Username" required="required" />
+				maxlength="64" placeholder="Enter your User ID or Email address" required="required" />
 			<form:errors path="username" cssClass="text-warning" />
 		</div>
 
 		<div class="form-group">
 			<form:label path="password">Password</form:label>
 			<form:input path="password" type="password" class="form-control"
-				placeholder="Password" required="required" />
+				maxlength="128" placeholder="Enter your password" required="required" />
 			<form:errors path="password" cssClass="text-warning" />
 		</div>
 
 		<div class="form-group">
 			<form:label path="passwordConfirm">Confirm your password</form:label>
 				<form:input path="passwordConfirm" type="password" class="form-control"
-					placeholder="Confirm Password" required="required" />
+					maxlength="128" placeholder="Confirm password" required="required" />
 			<form:errors path="passwordConfirm" cssClass="text-warning" />
 		</div>
 

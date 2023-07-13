@@ -9,22 +9,27 @@
 			console.log("inside url");
 		    $("#productLink").value=$("#productUrl").value;
 		}
-		showHideDiv();
+		showHideTools();
+		showToolsOnLoad();
 	});
 	
-	function showHideDiv() {
+	function showHideTools() {
 		var checkBox = document.getElementById("ToolsCheckBox");
 		var ToolsDiv = document.getElementById("ToolsDiv");
-		var imageUrl = document.getElementById("productImageLink") ?
-				document.getElementById("productImageLink").value : "";
-		if (imageUrl != "") {
-			checkBox.checked = true;
-		}
 		if (true == checkBox.checked) {
 			ToolsDiv.style.display = "block";
 		} else {
 			ToolsDiv.style.display = "none";
 		}
+	}
+	function showToolsOnLoad() {
+		var checkBox = document.getElementById("ToolsCheckBox");
+		var imageUrl = document.getElementById("productImageLink") ?
+				document.getElementById("productImageLink").value : "";
+		if (imageUrl != "") {
+			checkBox.checked = true;
+		}
+		showHideTools();
 	}
 </script>
 <div class="container">
@@ -36,7 +41,7 @@
 			<div class="panel panel-primary">
 				<div class="panel-heading">Add Product 
 				<label class="switch" style="float: right;">
-  					<input type="checkbox" id="ToolsCheckBox" onclick="showHideDiv()">
+  					<input type="checkbox" id="ToolsCheckBox" onclick="showHideTools()">
   					<span class="slider round" title="Click here to show or hide the tools."></span>
 				</label>
 				</div>
@@ -47,21 +52,21 @@
 						<fieldset class="form-group">
 							<form:label path="productName">Product Name</form:label>
 							<form:input path="productName" type="text" class="form-control"
-								required="required" />
+								maxlength="400" placeholder="Enter product name" required="required" />
 							<form:errors path="productName" cssClass="text-warning" />
 						</fieldset>
 
 						<fieldset class="form-group">
 							<form:label path="description">Description</form:label>
 							<form:input path="description" type="text" class="form-control"
-								required="required" />
+								maxlength="600" placeholder="Enter product description" required="required" />
 							<form:errors path="description" cssClass="text-warning" />
 						</fieldset>
 
 						<fieldset class="form-group">
 							<form:label path="productLink">Product Link</form:label>
 							<form:input path="productLink" type="text" class="form-control"
-								required="required" />
+								maxlength="1000" placeholder="Enter product link" required="required" />
 							<form:errors path="productLink" cssClass="text-warning" />
 						</fieldset>
 
@@ -90,36 +95,36 @@
 	<c:if test="true">
 		<div class="col-md-6 col-md-offset" id="ToolsDiv">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Image Link Generator</div>
+				<div class="panel-heading">Tools</div>
 				<div class="panel-body">
-					<div style="display: none;">
-						<a href="/upload" class="product-btn">Test Upload Page</a>
-					</div>
-					<br>
-					<div>
-						<label for="image-link">Download Image:</label><br>
-						<input type="text" id="image-link">
-						<button onclick="downloadImage()">Download</button>
-					</div><br>
+
 					<form action="/getImage" method="get">
 						<label for="productUrl">Product URL:</label><br>
-						<input type="text" id="productUrl" name="productUrl" value="${productUrl}"><br><br>
-						<input type="submit" value="Fetch Image Link">
+						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter product url to fetch image link" id="productUrl" name="productUrl" value="${productUrl}">
+						<br>
+						<input type="submit" class="btn btn-success" value="Fetch Image Link">
 					</form>
-					<div>
-						<button onclick='getProductDescFromURL();'>Fill Description</button>
+
+					<div style="display: none;">
+						<button onclick='getProductDescFromURL();' class="btn btn-success">Fill Description</button>
 					</div>
-					<!--  
-					<button onclick='copyUrl();'>Transfer</button>
-					<br>
-					-->
+
 					<c:if test="${not empty imageUrl}">
 						<label for="productImageLink">Product Image Link:</label>
 						<br>
-						<input type="text" id="productImageLink" name="productImageLink"
+						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter image link" id="productImageLink" name="productImageLink"
 							value="${imageUrl}">
-						<button onclick='copyImageUrl();'>Transfer</button>
+						<br>
+						<button onclick='copyImageUrl();' class="btn btn-success">Transfer</button>
+						<br>
+						<br>
 					</c:if>
+					<div>
+						<label for="image-link">Download Image:</label><br>
+						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter image link to download image" id="image-link">
+						<br>
+						<button onclick="downloadImage()" class="btn btn-success">Download</button>
+					</div>
 				</div>
 			</div>
 		</div>

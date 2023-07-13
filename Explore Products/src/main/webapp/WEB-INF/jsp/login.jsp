@@ -4,7 +4,9 @@
 <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
 <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style>
+@import url('https://fonts.googleapis.com/css?family=Roboto');
 body {
+	font-family: 'Roboto', sans-serif;
 	background-image: url("/commonimage/bg-image.jpg");
 	background-size: cover;
 	background-position: center;
@@ -31,8 +33,8 @@ body {
 }
 
 .form-control {
-	height: 50px;
-	font-size: 16px;
+	height: 40px;
+	font-size: 14px;
 	border-radius: 5px;
 	box-shadow: none;
 }
@@ -89,9 +91,13 @@ body {
 				<h6 class="text-danger">${error}</h6>
 				<h6 class="text-success">${message}</h6>
 				
-				<input name="username" type="text" class="form-control" placeholder="Username" autofocus /> 
-
-				<input name="password" type="password" class="form-control" placeholder="Password" /> 
+				<label for="username">User ID or Email</label>
+				<br>
+				<input name="username" type="text" maxlength="64" class="form-control" required="required" placeholder="Enter your User ID or Email address" autofocus /> 
+				<br>
+				<label for="password">Password</label>
+				<br>
+				<input name="password" type="password" maxlength="128" class="form-control" required="required" placeholder="Enter your password" /> 
 					
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				

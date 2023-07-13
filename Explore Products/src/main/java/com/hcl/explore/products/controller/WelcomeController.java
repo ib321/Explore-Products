@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.hcl.explore.products.service.IExploreProductService;
+import com.hcl.explore.products.service.UserService;
 
 /**
  * 
@@ -25,6 +26,9 @@ public class WelcomeController {
 
 	@Autowired
 	private IExploreProductService expProductService;
+
+	@Autowired
+	private UserService userService;
 	
 	@Value("${url.username.isEncrypted}")
 	private boolean isUrlUserNameEnc;
@@ -32,7 +36,8 @@ public class WelcomeController {
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String showWelcomePage(ModelMap model) {
 		String userName = getLoggedinUserName();
-		model.put("name", userName);
+		String fullname = getFullName();
+		model.put("fullname", fullname);
 		model.put("products", expProductService.getProductsByUser(userName));
 		if (isUrlUserNameEnc) {
 			BasicTextEncryptor textEncryptor = new BasicTextEncryptor();
@@ -63,6 +68,10 @@ public class WelcomeController {
 		}
 
 		return principal.toString();
+	}
+
+	private String getFullName() {
+		return userService.findByUsername(getLoggedinUserName()).getFullname();
 	}
 
 }

@@ -23,7 +23,7 @@ public class ErrorController {
 
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("exception", ex.getLocalizedMessage());
-		System.out.println(ex.getLocalizedMessage());
+		ex.printStackTrace();
 		mv.addObject("url", request.getRequestURL());
 		mv.setViewName("error");
 		return mv;

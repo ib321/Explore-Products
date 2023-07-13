@@ -6,7 +6,7 @@
 
 <div class="container">
 
-	<div class="panel-body"> Welcome, ${name} ! <br>
+	<div class="panel-body"> Welcome, ${fullname} ! <br>
 		Go to <a href="/list-products">Products</a>. To Manage your Products.
 		<br>
 		<%@ include file="shareButton.jsp"%>

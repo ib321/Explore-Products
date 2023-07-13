@@ -16,6 +16,8 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
+    
+    private String fullname;
 
     private String username;
 
@@ -34,6 +36,14 @@ public class User {
     public void setId(Long id) {
         this.id = id;
     }
+
+	public String getFullname() {
+		return fullname;
+	}
+
+	public void setFullname(String fullname) {
+		this.fullname = fullname;
+	}
 
     public String getUsername() {
         return username;

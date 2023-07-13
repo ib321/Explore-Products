@@ -46,7 +46,7 @@ To use Explore Products, open your browser and go to http://localhost:8098/. You
 
 Once you are logged in, you can go to the product page where you can view all your products with options to delete or update them. You can add a new product by clicking on the "Add Product" button and entering the product name, description, image file (under 1 MB), and product link (affiliated link of Amazon or Flipkart).
 
-You can also generate a link for your all products that you can share with other users. The link will look something like this: http://localhost:8098/show-products?user=admin. When someone opens this link, they will see all your products and can click on them to buy from the online store. User could earn some money if the product link is an affiliated link.
+You can also generate a link for your all products that you can share with other users. The link will look something like this: `http://localhost:8098/show-products?refShareId=MOe7mgAlXOivDg30Nvb6EQ%3D%3D`. When someone opens this link, they will see all your products and can click on them to buy from the online store. User could earn some money if the product link is an affiliated link.
 
 ## License
 

@@ -1,7 +1,6 @@
 package com.hcl.explore.products.controller;
 
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -63,15 +62,15 @@ public class ProductController {
 
 	@RequestMapping(value = "/list-products", method = RequestMethod.GET)
 	public String showProducts(ModelMap model) {
-		String name = getLoggedInUserName(model);
-		model.put("products", expProductService.getProductsByUser(name));
+		String userName = getLoggedInUserName(model);
+		model.put("products", expProductService.getProductsByUser(userName));
 		return "list-products";
 	}
 
 	@RequestMapping(value = "/search-products", method = RequestMethod.GET)
 	public String searchProducts(@RequestParam String search, ModelMap model) {
-		String name = getLoggedInUserName(model);
-		model.put("products", expProductService.searchProducts(name, search));
+		String userName = getLoggedInUserName(model);
+		model.put("products", expProductService.searchProducts(userName, search));
 		return "list-products";
 	}
 
@@ -103,11 +102,6 @@ public class ProductController {
 		Product product = expProductService.getProductById(id).get();
 		model.put("product", product);
 		return "product";
-	}
-
-	@RequestMapping(value = "/upload", method = RequestMethod.GET)
-	public String uploadPage(ModelMap model) {
-		return "fileupload";
 	}
 	
 	
@@ -186,18 +180,6 @@ public class ProductController {
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("dangermsg", "An error occurred while connecting: " + e.getMessage());
-		}
-		return "redirect:/add-product";
-	}
-
-	@RequestMapping(value = "/upload", method = RequestMethod.POST)
-	public String uploadImage(ModelMap model, @RequestParam("file") MultipartFile file) {
-		final Path root = Paths.get("./src/main/resources/static/images");
-		try {
-			Files.createDirectories(root);
-			Files.copy(file.getInputStream(), root.resolve(file.getOriginalFilename()));
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 		return "redirect:/add-product";
 	}
