@@ -96,10 +96,17 @@ body {
 		</div>
 
 		<div class="form-group">
-			<form:label path="username">User ID or Email</form:label>
+			<form:label path="username">User ID</form:label>
 			<form:input path="username" type="text" class="form-control"
-				maxlength="64" placeholder="Enter your User ID or Email address" required="required" />
+				maxlength="64" placeholder="Enter your User ID" required="required" />
 			<form:errors path="username" cssClass="text-warning" />
+		</div>
+
+		<div class="form-group">
+			<form:label path="email">Email Address</form:label>
+			<form:input path="email" type="text" class="form-control"
+				maxlength="64" placeholder="Enter email address" required="required" />
+			<form:errors path="email" cssClass="text-warning" />
 		</div>
 
 		<div class="form-group">

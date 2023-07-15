@@ -11,6 +11,7 @@
 		}
 		showHideTools();
 		showToolsOnLoad();
+		alertAutoFetchNotWorked();
 	});
 	
 	function showHideTools() {
@@ -22,14 +23,30 @@
 			ToolsDiv.style.display = "none";
 		}
 	}
+
 	function showToolsOnLoad() {
 		var checkBox = document.getElementById("ToolsCheckBox");
 		var imageUrl = document.getElementById("productImageLink") ?
 				document.getElementById("productImageLink").value : "";
-		if (imageUrl != "") {
+		var productNameFill = document.getElementById("productNameFill") ?
+				document.getElementById("productNameFill").value : "";
+		var productDescFill = document.getElementById("productDescFill") ?
+				document.getElementById("productDescFill").value : "";
+		if (imageUrl != "" || productNameFill != "" || productDescFill != "") {
 			checkBox.checked = true;
 		}
 		showHideTools();
+	}
+
+	function alertAutoFetchNotWorked() {
+		console.log('alertAutoFetchNotWorked called');
+		var imageUrl = document.getElementById("productImageLink") ? document
+				.getElementById("productImageLink").value : "";
+				 console.log('imageUrl:', imageUrl);
+		if (imageUrl == 'Did not worked!') {
+			console.log('condition met');
+			alert('Product Details Automatic Fetching Failed. Try again or manually enter the values');
+		}
 	}
 </script>
 <div class="container">
@@ -59,7 +76,7 @@
 						<fieldset class="form-group">
 							<form:label path="description">Description</form:label>
 							<form:input path="description" type="text" class="form-control"
-								maxlength="600" placeholder="Enter product description" required="required" />
+								maxlength="1000" placeholder="Enter product description" required="required" />
 							<form:errors path="description" cssClass="text-warning" />
 						</fieldset>
 
@@ -84,7 +101,7 @@
 						</fieldset>
 						<br>
 						<button type="submit" class="btn btn-success">Save</button>
-						<button type="reset" class="btn btn-warning">Clear</button>
+						<button type="reset" class="btn btn-warning">Clear Changes</button>
 					</form:form>
 
 				</div>
@@ -98,32 +115,31 @@
 				<div class="panel-heading">Tools</div>
 				<div class="panel-body">
 
-					<form action="/getImage" method="get">
+					<form action="/autoFetchProductDetails" method="get">
 						<label for="productUrl">Product URL:</label><br>
-						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter product url to fetch image link" id="productUrl" name="productUrl" value="${productUrl}">
+						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter product url to fetch product details" id="productUrl" name="productUrl" value="${productUrl}">
 						<br>
-						<input type="submit" class="btn btn-success" value="Fetch Image Link">
+						<input type="submit" class="btn btn-success" value="Fetch Product Details">
 					</form>
-
-					<div style="display: none;">
-						<button onclick='getProductDescFromURL();' class="btn btn-success">Fill Description</button>
+					<br>
+					<div>
+						<label for="productNameFill">Fetched Product Name:</label><br>
+						<input type="text" value="${productNameFill}" class="form-control" required="required" maxlength="400" placeholder="Fetched Product name" id="productNameFill">
 					</div>
-
-					<c:if test="${not empty imageUrl}">
+					<div>
+						<label for="productDescFill">Fetched Product Description:</label><br>
+						<input type="text" value="${productDescFill}" class="form-control" required="required" maxlength="1000" placeholder="Fetched Product description" id="productDescFill">
+					</div>
+					<div>
 						<label for="productImageLink">Product Image Link:</label>
 						<br>
-						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter image link" id="productImageLink" name="productImageLink"
+						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Fetched Product image link" id="productImageLink" name="productImageLink"
 							value="${imageUrl}">
 						<br>
-						<button onclick='copyImageUrl();' class="btn btn-success">Transfer</button>
+						<button onclick='copyProductName()' class="btn btn-success">Transfer Name</button>
+						<button onclick='copyProductDesc()' class="btn btn-success">Transfer Description</button>
+						<button onclick='downloadImage()' class="btn btn-success">Download Image</button>
 						<br>
-						<br>
-					</c:if>
-					<div>
-						<label for="image-link">Download Image:</label><br>
-						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter image link to download image" id="image-link">
-						<br>
-						<button onclick="downloadImage()" class="btn btn-success">Download</button>
 					</div>
 				</div>
 			</div>

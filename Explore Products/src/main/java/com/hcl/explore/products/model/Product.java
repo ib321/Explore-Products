@@ -18,8 +18,11 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private long id;
 	private String userName;
+	@Column(name = "PRODUCT_NAME", length = 400)
 	private String productName;
+	@Column(name = "PRODUCT_IMAGE_SRC")
 	private String productImageSrc;
+	@Column(name = "description", length = 1000)
 	private String description;
 	@Column(name = "PRODUCT_LINK", length = 1000)
 	private String productLink;

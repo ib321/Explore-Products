@@ -31,7 +31,7 @@ public class ProductValidator implements Validator {
 			errors.rejectValue("description", "size.min.description");
 		}
 		
-		if (product.getDescription().length() > 600) {
+		if (product.getDescription().length() > 1000) {
 			errors.rejectValue("description", "size.max.description");
 		}
 

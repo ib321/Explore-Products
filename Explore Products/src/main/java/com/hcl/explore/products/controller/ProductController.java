@@ -1,6 +1,8 @@
 package com.hcl.explore.products.controller;
 
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -8,6 +10,7 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -158,30 +161,62 @@ public class ProductController {
 		return "redirect:/list-products";
 	}
 
-	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
-	public String getImage(@RequestParam String productUrl, Product product, BindingResult result, ModelMap model,
-			RedirectAttributes redirectAttributes) throws IOException {
+	@RequestMapping(value = "/autoFetchProductDetails", method = RequestMethod.GET)
+	public String autoFetchProductDetails(@RequestParam String productUrl, Product product, BindingResult result, ModelMap model,
+			RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+		String referer = request.getHeader("referer");
+	    String redirectUrl="/add-product";
+	    if (referer != null) {
+	        if (referer.contains("/add-product")) {
+	            redirectUrl = "/add-product";
+	        } else if (referer.contains("/update-product")) {
+	        	 try {
+	                 URI refererUri = new URI(referer);
+	                 redirectUrl = refererUri.getPath() + "?" + refererUri.getQuery();
+	             } catch (URISyntaxException e) {
+	                 e.printStackTrace();
+	             }
+	        }
+	    }
 		String productLink = productUrl;
 		if (productUrl == null || productUrl.isEmpty())
 			return "redirect:/add-product";
 		try {
-			Document doc = Jsoup.connect(productUrl).get();
+			Document doc = Jsoup.connect(productUrl)
+					  .userAgent("Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.110 Safari/537.36")
+					  .header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9")
+					  .header("Referer", "https://www.amazon.com/")
+					  .get();
 			String imageUrl;
-			if (productUrl.contains("amazon"))
-				imageUrl = doc.select("#landingImage").attr("src");
-			else if (productUrl.contains("flipkart"))
-				imageUrl = doc.select("img._396cs4").attr("src");
-			else
-				imageUrl = "";
+			String productName;
+			String productDescription;
+
+			if (productUrl.contains("amazon")) {
+			    imageUrl = doc.select("#landingImage").attr("src");
+			    productName = doc.select("#productTitle").text();
+			    productDescription = doc.select("#feature-bullets").text();
+			} else if (productUrl.contains("flipkart")) {
+			    imageUrl = doc.select("img._396cs4").attr("src");
+			    productName = doc.select("span.B_NuCI").text();
+			    productDescription = doc.select("div._1mXcCf.RmoJUa").text();
+			} else {
+			    imageUrl = "";
+			    productName = "";
+			    productDescription = "";
+			}
+
 			if (imageUrl.isEmpty())
-				imageUrl = "Did not worked!";
+			    imageUrl = "Did not worked!";
 			redirectAttributes.addFlashAttribute("imageUrl", imageUrl);
 			redirectAttributes.addFlashAttribute("productUrl", productLink);
+			redirectAttributes.addFlashAttribute("productNameFill", productName);
+			redirectAttributes.addFlashAttribute("productDescFill", productDescription);
+			model.put("product", product);
 		} catch (Exception e) {
 			e.printStackTrace();
 			redirectAttributes.addFlashAttribute("dangermsg", "An error occurred while connecting: " + e.getMessage());
 		}
-		return "redirect:/add-product";
+		return "redirect:"+ redirectUrl;
 	}
 
 }

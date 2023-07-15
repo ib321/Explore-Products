@@ -91,9 +91,9 @@ body {
 				<h6 class="text-danger">${error}</h6>
 				<h6 class="text-success">${message}</h6>
 				
-				<label for="username">User ID or Email</label>
+				<label for="username">User ID</label>
 				<br>
-				<input name="username" type="text" maxlength="64" class="form-control" required="required" placeholder="Enter your User ID or Email address" autofocus /> 
+				<input name="username" type="text" maxlength="64" class="form-control" required="required" placeholder="Enter your User ID" autofocus /> 
 				<br>
 				<label for="password">Password</label>
 				<br>

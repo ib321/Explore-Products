@@ -34,7 +34,7 @@ public class ErrorController {
 			HttpServletResponse response) {
 
 		ModelAndView modelAndView = new ModelAndView("error");
-		modelAndView.getModel().put("dangermsg", "Image file too large! Try again with a image smaller than 1 Mb.");
+		modelAndView.getModel().put("dangermsg", "Image size exceeded! Try again with a image smaller than 1 MB.");
 		return modelAndView;
 	}
 }
