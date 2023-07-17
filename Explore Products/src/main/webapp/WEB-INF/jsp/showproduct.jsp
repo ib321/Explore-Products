@@ -23,14 +23,12 @@
 				<c:forEach var="product" items="${products}">
 					<div class="product">
 						<div class="product-image">
-							<img src="${product.productImageSrc}"
-								alt="${product.productName}">
+							<img src="${product.productImageSrc}" alt="${product.productName}" loading="lazy">
 						</div>
 						<div class="product-info">
 							<h3 data-toggle="tooltip" title="${product.productName}" >${product.productName}</h3>
 							<h5 data-toggle="tooltip" title="${product.description}" >${product.description}</h5>
-							<a href="${product.productLink}"  target="_blank" class="btn btn-info">Click
-								Here</a>
+							<a href="${product.productLink}"  target="_blank" class="btn btn-info">Click Here</a>
 						</div>
 					</div>
 				</c:forEach>

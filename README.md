@@ -48,10 +48,6 @@ Once you are logged in, you can go to the product page where you can view all yo
 
 You can also generate a link for your all products that you can share with other users. The link will look something like this: `http://localhost:8098/show-products?refShareId=MOe7mgAlXOivDg30Nvb6EQ%3D%3D`. When someone opens this link, they will see all your products and can click on them to buy from the online store. User could earn some money if the product link is an affiliated link.
 
-## License
-
-Explore Products is licensed under the GNU General Public License v3.0. See [LICENSE](LICENSE) file for more details.
-
 ## Contributing
 
 If you want to contribute to Explore Products, you are welcome to do so. Please follow these steps:
@@ -62,6 +58,10 @@ If you want to contribute to Explore Products, you are welcome to do so. Please 
 - Test your code thoroughly and ensure it works as expected and does not break any existing functionality.
 - Commit and push your changes to your branch and create a pull request with a detailed description of your changes and why they are needed.
 - Wait for feedback or approval from the maintainer before merging your pull request.
+
+## License
+
+The Explore Products sample application is licensed under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0). Also see [LICENSE](LICENSE.txt) file for more details.
 
 ## Contact
 

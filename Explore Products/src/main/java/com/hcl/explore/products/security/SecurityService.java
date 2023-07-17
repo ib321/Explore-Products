@@ -13,20 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.hcl.explore.products.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.hcl.explore.products.model.Role;
+package com.hcl.explore.products.security;
 
 /**
- * Repository class for <code>Role</code> domain objects All method names are compliant
- * with Spring Data naming conventions so this interface can easily be extended for Spring
- * Data. See:<br>
- * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories.query-methods.query-creation
- *
+ * SecurityService interface
+ * 
  * @author Indian Bittu
  *
  */
-public interface RoleRepository extends JpaRepository<Role, Long>{
+public interface SecurityService {
+	boolean isAuthenticated();
+    void autoLogin(String username, String password);
 }

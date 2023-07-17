@@ -1,4 +1,5 @@
-<head>
+<%@ include file="common/header.jspf"%>
+
 <title>Log in</title>
 <link href="/webjars/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
 <script src="/webjars/jquery/2.2.4/jquery.min.js"></script>
@@ -81,12 +82,10 @@ body {
 	color: #28a745;
 }
 </style>
-</head>
-<body>
+
 	<div class="container">
 		<form class="form-signin" method="POST" action="/login">
 			<h2 class="form-heading">Log in</h2>
-
 			<div class="form-group">
 				<h6 class="text-danger">${error}</h6>
 				<h6 class="text-success">${message}</h6>
@@ -108,6 +107,8 @@ body {
 				</h6>
 			</div>
 		</form>
-</div>
-	<script src="/js/main.js"></script>
-</body>
+	</div>
+
+<script src="/js/main.js"></script>
+
+<%@ include file="common/footer.jspf"%>

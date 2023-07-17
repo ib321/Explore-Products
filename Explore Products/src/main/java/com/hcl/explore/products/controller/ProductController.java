@@ -1,6 +1,21 @@
+/*
+ * Copyright 2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hcl.explore.products.controller;
 
-import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Path;
@@ -46,7 +61,16 @@ public class ProductController {
 
 	@Value("${url.username.isEncrypted}")
 	private boolean isUrlUserNameEnc;
+	
+	private static final String  STATIC_PARTIAL_IMAGE_PATH = "./src/main/resources/static/images/";
 
+	/**
+	 * Retrieves the user-id of the currently logged-in user.
+	 *
+	 * @param model The ModelMap object representing the model.
+	 * @return The user-id of the currently logged-in user, or the string representation
+	 *         of the principal object if the principal is not an instance of UserDetails.
+	 */
 	private String getLoggedInUserName(ModelMap model) {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -63,6 +87,13 @@ public class ProductController {
 	 * ------------------------------------------------------
 	 */
 
+	/**
+	 * Handles requests to the /list-products URL and displays a list of products
+	 * associated with the currently logged-in user.
+	 *
+	 * @param model The ModelMap object representing the model.
+	 * @return The view name "list-products" for displaying the list of products.
+	 */
 	@RequestMapping(value = "/list-products", method = RequestMethod.GET)
 	public String showProducts(ModelMap model) {
 		String userName = getLoggedInUserName(model);
@@ -77,6 +108,14 @@ public class ProductController {
 		return "list-products";
 	}
 
+	/**
+	 * Handles requests to the /show-products URL and displays a list of products
+	 * associated with the user specified by the refShareId parameter.
+	 *
+	 * @param refShareId The encrypted or unencrypted username of the user.
+	 * @param model The ModelMap object representing the model.
+	 * @return The view name "showproduct" for displaying the list of products.
+	 */
 	@RequestMapping(value = "/show-products", method = RequestMethod.GET)
 	public String showAllProductPage(@RequestParam String refShareId, ModelMap model) {
 		String user=refShareId;
@@ -94,6 +133,13 @@ public class ProductController {
 		return "showproduct";
 	}
 
+	/**
+	 * Handles GET requests to the /add-product URL and displays a page for adding
+	 * a new product provide a fresh new Product object.
+	 *
+	 * @param model The ModelMap object representing the model.
+	 * @return The view name "product" for displaying the page for adding a new product.
+	 */
 	@RequestMapping(value = "/add-product", method = RequestMethod.GET)
 	public String showAddProductPage(ModelMap model) {
 		model.addAttribute("product", new Product());
@@ -114,6 +160,16 @@ public class ProductController {
 	 * ------------------------------------------------------------
 	 */
 
+	/**
+	 * Handles POST requests to the /add-product URL and adds a new product to
+	 * the App also save the product image.
+	 *
+	 * @param model The ModelMap object representing the model.
+	 * @param product The Product object representing the product to add.
+	 * @param result The BindingResult object representing binding results.
+	 * @param redirectAttributes The RedirectAttributes object used to add flash attributes.
+	 * @return A redirect to view either the /product or /list-products.
+	 */
 	@RequestMapping(value = "/add-product", method = RequestMethod.POST)
 	public String addProduct(ModelMap model, @Valid Product product, BindingResult result, RedirectAttributes redirectAttributes) {
 		productValidator.validate(product, result);
@@ -121,7 +177,7 @@ public class ProductController {
 			return "product";
 		}
 
-		final Path path = Paths.get("./src/main/resources/static/images/" + getLoggedInUserName(model) + "/");
+		final Path path = Paths.get(STATIC_PARTIAL_IMAGE_PATH + getLoggedInUserName(model) + "/");
 		MultipartFile file = product.getProductImageFile();
 		product.setProductImageSrc("/images/" + getLoggedInUserName(model) + "/" + expProductService.saveProductImage(path, file));
 
@@ -140,7 +196,7 @@ public class ProductController {
 
 		String productImageSrc = product.getProductImageSrc();
 		expProductService.deleteProductImage(productImageSrc);
-		final Path path = Paths.get("./src/main/resources/static/images/" + getLoggedInUserName(model) + "/");
+		final Path path = Paths.get(STATIC_PARTIAL_IMAGE_PATH + getLoggedInUserName(model) + "/");
 		MultipartFile file = product.getProductImageFile();
 		product.setProductImageSrc("/images/" + getLoggedInUserName(model) + "/" + expProductService.saveProductImage(path, file));
 
@@ -149,7 +205,16 @@ public class ProductController {
 		redirectAttributes.addFlashAttribute("message", "Product Updated successfully.");
 		return "redirect:/list-products";
 	}
-	
+
+	/**
+	 * Handles GET requests to the /delete-product URL and deletes a product with
+	 * a given ID also deletes the product image.
+	 *
+	 * @param id The ID of the product to delete.
+	 * @param redirectAttributes The RedirectAttributes object used to add flash attributes.
+	 * @param model The ModelMap object representing the model.
+	 * @return A redirect to the /list-products URL.
+	 */
 	@RequestMapping(value = "/delete-product", method = RequestMethod.GET)
 	public String deleteProduct(@RequestParam long id, RedirectAttributes redirectAttributes, ModelMap model) {
 		String productName = expProductService.getProductById(id).get().getProductName();
@@ -161,9 +226,22 @@ public class ProductController {
 		return "redirect:/list-products";
 	}
 
+	/**
+	 * Handles GET requests to the /autoFetchProductDetails URL and automatically fetches
+	 * product details like name,description,imageLink from a given product URL.
+	 *
+	 * @param productUrl The URL of the product to fetch details from.
+	 * @param product The Product object representing the product.
+	 * @param result The BindingResult object representing binding results.
+	 * @param model The ModelMap object representing the model.
+	 * @param redirectAttributes The RedirectAttributes object used to add flash attributes.
+	 * @param request The HttpServletRequest object representing the current request.
+	 * @return it redirect to the same URL from where request has came for autoFetchProductDetails.
+	 * 
+	 */
 	@RequestMapping(value = "/autoFetchProductDetails", method = RequestMethod.GET)
 	public String autoFetchProductDetails(@RequestParam String productUrl, Product product, BindingResult result, ModelMap model,
-			RedirectAttributes redirectAttributes, HttpServletRequest request) throws IOException {
+			RedirectAttributes redirectAttributes, HttpServletRequest request) {
 		String referer = request.getHeader("referer");
 	    String redirectUrl="/add-product";
 	    if (referer != null) {

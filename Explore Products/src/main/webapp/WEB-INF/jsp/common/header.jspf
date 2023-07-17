@@ -11,13 +11,12 @@
 <script src="/webjars/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 <style>
 .footer {
-	position: fixed;
+	position: inherit;
 	left: 0;
 	bottom: 0;
 	width: 100%;
-	background-color: black;
-	color: white;
-	height: 100px;
+	color: black;
+	height: 22px;
 	text-align: center;
 }
 </style>

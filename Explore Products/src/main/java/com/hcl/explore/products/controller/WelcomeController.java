@@ -1,3 +1,19 @@
+/*
+ * Copyright 2023 the original author or authors.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package com.hcl.explore.products.controller;
 
 import java.io.UnsupportedEncodingException;
@@ -33,6 +49,13 @@ public class WelcomeController {
 	@Value("${url.username.isEncrypted}")
 	private boolean isUrlUserNameEnc;
 
+	/**
+	 * Handles GET requests to the / and /welcome URLs and displays a welcome
+	 * page to the user also puts urlEncodedUserName to model.
+	 *
+	 * @param model The ModelMap object representing the model.
+	 * @return The view name for displaying the welcome page.
+	 */
 	@RequestMapping(value = { "/", "/welcome" }, method = RequestMethod.GET)
 	public String showWelcomePage(ModelMap model) {
 		String userName = getLoggedinUserName();
@@ -53,6 +76,15 @@ public class WelcomeController {
 		model.put("urlUserName", urlEncodedUserName);
 		return "welcome";
 	}
+
+	/**
+	 * Handles GET requests to the /search and /searchWelcome URLs and displays
+	 * a welcome page with search results to the user.
+	 *
+	 * @param search The search query entered by the user.
+	 * @param model The ModelMap object representing the model.
+	 * @return The view name for displaying the welcome page with search results.
+	 */
 	@RequestMapping(value = { "/search", "/searchWelcome" }, method = RequestMethod.GET)
 	public String showWelcomePage(@RequestParam String search,ModelMap model) {
 		model.put("name", getLoggedinUserName());
@@ -60,6 +92,12 @@ public class WelcomeController {
 		return "welcome";
 	}
 
+	/**
+	 * Retrieves the user-id of the currently logged-in user.
+	 *
+	 * @return The user-id of the currently logged-in user, or the string representation
+	 *         of the principal object if the principal is not an instance of UserDetails.
+	 */
 	private String getLoggedinUserName() {
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -70,6 +108,11 @@ public class WelcomeController {
 		return principal.toString();
 	}
 
+	/**
+	 * Retrieves the Full Name of the currently logged-in user.
+	 *
+	 * @return The Full Name of the currently logged-in user.
+	 */
 	private String getFullName() {
 		return userService.findByUsername(getLoggedinUserName()).getFullname();
 	}
