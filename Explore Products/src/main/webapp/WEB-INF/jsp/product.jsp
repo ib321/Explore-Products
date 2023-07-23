@@ -112,11 +112,12 @@
 	<c:if test="true">
 		<div class="col-md-6 col-md-offset" id="ToolsDiv">
 			<div class="panel panel-primary">
-				<div class="panel-heading">Tools</div>
+				<div class="panel-heading">Tools (Beta)</div>
 				<div class="panel-body">
 
 					<form action="/autoFetchProductDetails" method="get">
-						<label for="productUrl">Product URL:</label><br>
+						<label for="productUrl">Product URL:</label>
+						<span class="glyphicon glyphicon-info-sign" title="You can enter product URL or affiliated product link of the product you want to add from flipkart or Amazon."></span><br>
 						<input type="text" class="form-control" required="required" maxlength="1000" placeholder="Enter product url to fetch product details" id="productUrl" name="productUrl" value="${productUrl}">
 						<br>
 						<input type="submit" class="btn btn-success" value="Fetch Product Details">

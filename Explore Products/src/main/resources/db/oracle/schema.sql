@@ -2,6 +2,7 @@
 drop table "user";
 drop table role;
 drop table product;
+------------------------------------
 
 -- Create table for User
 CREATE TABLE "user" (
@@ -37,6 +38,7 @@ CREATE TABLE product (
     PRODUCT_LINK VARCHAR2(1000)
 );
 
+-- below steps are optional and only applicable in some cases*
 -- try adding properties below to automatic load schema
 -- spring.datasource.initialization-mode=always
 -- put schema and data sql file into resources folder

@@ -86,7 +86,8 @@
 	<div class="video-popup">
 		<div class="popup-content">
 			<span class="close">&times;</span>
-			<p>Copy this link:</p>
+			Share this link:
+			<span class="glyphicon glyphicon-info-sign" title="Share this link with anyone.using this link they can view, browse and purchase all your added product"></span><br>
 			<input type="text" id="link"
 				value="http://localhost:8098/show-products?refShareId=${urlUserName}">
 			<button id="copy">Copy</button>

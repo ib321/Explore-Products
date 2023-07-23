@@ -10,6 +10,7 @@ Insert into PRODUCT (ID,DESCRIPTION,PRODUCT_IMAGE_SRC,PRODUCT_LINK,PRODUCT_NAME,
 
 commit;
 
+-- below steps are optional and only applicable in some cases*
 -- try adding properties below to automatic load schema
 -- spring.datasource.initialization-mode=always
 -- put schema and data sql file into resources folder
